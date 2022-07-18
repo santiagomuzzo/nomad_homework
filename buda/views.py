@@ -77,7 +77,10 @@ class TradeObtainer(View):
             self.market_trades(market)
             self.top_trade_calculator()
             self.selected_trade['market'] = market
-            self.selected_trade['value'] = self.value_top_trade
+            value_in_coin = str(self.value_top_trade) + ' ' + market.split('-')[1]
+            self.selected_trade['value'] = value_in_coin
+            price_in_coin = self.selected_trade['price'] + ' ' + market.split('-')[1]
+            self.selected_trade['price'] = price_in_coin
             if self.selected_trade['amount'] != '0':
                 self.selected_trade['timestamp'] = time.ctime(
                     int(self.selected_trade['timestamp']) / 1000)
