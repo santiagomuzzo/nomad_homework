@@ -20,7 +20,6 @@ class TradeObtainer(View):
         self.value_top_trade = 0
         self.url = ''
         self.market_ids = self._obtain_markets()
-        self.top_trades = 'self.get()'
 
     def _obtain_markets(self):
         market_ids = []
@@ -77,9 +76,11 @@ class TradeObtainer(View):
             self.market_trades(market)
             self.top_trade_calculator()
             self.selected_trade['market'] = market
-            value_in_coin = str(self.value_top_trade) + ' ' + market.split('-')[1]
+            value_in_coin = str(
+                self.value_top_trade) + ' ' + market.split('-')[1]
             self.selected_trade['value'] = value_in_coin
-            price_in_coin = self.selected_trade['price'] + ' ' + market.split('-')[1]
+            price_in_coin = self.selected_trade[
+                'price'] + ' ' + market.split('-')[1]
             self.selected_trade['price'] = price_in_coin
             if self.selected_trade['amount'] != '0':
                 self.selected_trade['timestamp'] = time.ctime(
@@ -89,4 +90,4 @@ class TradeObtainer(View):
             top_trades.append(self.selected_trade)
 
         context = {'top_trades': top_trades}
-        return render(request, 'buda/callampa.html', context)
+        return render(request, 'buda/top_trades.html', context)
